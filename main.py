@@ -31,8 +31,8 @@ class Application(tkinter.Frame):
     def init_canvas(self):
         self.canvas = tkinter.Canvas(
             self, bg='lightblue', width=300, height=300, highlightthickness=0)
-        # self.canvas_obj = DragToDrawCanvas.DragToDrawCanvas(self.canvas)
-        self.canvas_obj = ParallelLineCanvas.ParallelLineCanvas(self.canvas)
+        self.canvas_obj = DragToDrawCanvas.DragToDrawCanvas(self.canvas)
+        #self.canvas_obj = ParallelLineCanvas.ParallelLineCanvas(self.canvas)
         self.start_x = self.canvas_obj.start_x
         self.start_y = self.canvas_obj.start_y
         self.stop_x = self.canvas_obj.stop_x

@@ -5,34 +5,32 @@ import tkinter
 class DragToDrawCanvas:
     def __init__(self, canvas):
         self.canvas = canvas
-        self.start_x = tkinter.IntVar()
-        self.start_x_str = tkinter.StringVar()
-        self.start_y = tkinter.IntVar()
-        self.stop_x = tkinter.IntVar()
-        self.stop_y = tkinter.IntVar()
-        self.distance = tkinter.IntVar()
+        self.start_x = 0
+        self.start_y = 0
+        self.stop_x = 0
+        self.stop_y = 0
+        self.distance = 0
         self.end = tkinter.BooleanVar()
-        self.motion_bind_id = tkinter.IntVar()
+        self.motion_bind_id = 0
 
-    def button_press(self, event):
+    def mouse_click(self, event):
         self.end = not self.end
         if self.end is not True:
-            self.start_x.set(event.x)
-            self.start_x_str.set(str(event.x))
-            self.start_y.set(event.y)
+            self.start_x = event.x
+            self.start_y = event.y
             self.motion_bind_id = self.canvas.bind(
-                '<Motion>', self.button_move)
-            self.draw_line(self.start_x.get(),
-                           self.start_y.get(), event.x, event.y, "black")
+                '<Motion>', self.mouse_move)
+            self.draw_line(self.start_x,
+                           self.start_y, event.x, event.y, "black")
         else:
             self.canvas.unbind('<Motion>', self.motion_bind_id)
 
-    def button_move(self, event):
+    def mouse_move(self, event):
         self.distance = self.get_distance(
-            event.x, event.y, self.start_x.get(), self.start_y.get())
+            event.x, event.y, self.start_x, self.start_y)
         self.canvas.delete(self.drawing_line)
-        self.draw_line(self.start_x.get(),
-                       self.start_y.get(), event.x, event.y, "black")
+        self.draw_line(self.start_x,
+                       self.start_y, event.x, event.y, "black")
 
     def get_distance(self, x1, y1, x2, y2):
         d = round(math.sqrt((x2-x1)**2 + (y2-y1)**2), 1)
