@@ -43,7 +43,7 @@ class Application(tkinter.Frame):
         self.canvas.bind('<ButtonPress-1>', self.canvas_click)
 
     def canvas_click(self, event):
-        self.canvas_obj.mouse_click(event)
+        self.start_x, self.start_y = self.canvas_obj.mouse_click(event)
 
     def init_label(self):
         # 説明ラベル

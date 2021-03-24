@@ -24,6 +24,7 @@ class DragToDrawCanvas:
                            self.start_y, event.x, event.y, "black")
         else:
             self.canvas.unbind('<Motion>', self.motion_bind_id)
+        return self.start_x, self.start_y
 
     def mouse_move(self, event):
         self.distance = self.get_distance(

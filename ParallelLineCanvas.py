@@ -29,7 +29,7 @@ class ParallelLineCanvas:
             self.second_line = False
             self.line.append(self.draw_second_line(event))
             self.canvas.unbind('<Motion>', self.motion_bind_id)
-            return
+            return self.start_x, self.start_y
 
         # 1本目モード
         self.end = not self.end
@@ -42,6 +42,7 @@ class ParallelLineCanvas:
         else:
             self.line.append(self.draw_first_line(event))
             self.second_line = True
+        return self.start_x, self.start_y
 
     def button_move(self, event):
         if not self.second_line:
