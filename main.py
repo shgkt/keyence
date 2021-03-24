@@ -70,25 +70,30 @@ class Application(tkinter.Frame):
             self.distance_str.set('')
             self.motion_bind_id = self.canvas.bind(
                 '<Motion>', self.button_move)
+            self.draw_line(self.start_x.get(),
+                           self.start_y.get(), event.x, event.y, "black")
         else:
             self.stop_x_str.set('x : ' + str(event.x))
             self.stop_y_str.set('y : ' + str(event.y))
-            self.draw_line(self.start_x.get(),
-                           self.start_y.get(), event.x, event.y, "black")
             self.canvas.unbind('<Motion>', self.motion_bind_id)
 
     def button_move(self, event):
+        # 座標の文字列
         self.stop_x_str.set('x : ' + str(event.x))
         self.stop_y_str.set('y : ' + str(event.y))
+        # 距離の文字列
         self.distance_str.set(str(self.get_distance(
             event.x, event.y, self.start_x.get(), self.start_y.get())))
+        self.canvas.delete(self.drawing_line)
+        self.draw_line(self.start_x.get(),
+                       self.start_y.get(), event.x, event.y, "black")
 
     def get_distance(self, x1, y1, x2, y2):
         d = round(math.sqrt((x2-x1)**2 + (y2-y1)**2), 1)
         return d
 
     def draw_line(self, x1, y1, x2, y2, color):
-        self.canvas.create_line(x1, y1, x2, y2, fill=color)
+        self.drawing_line = self.canvas.create_line(x1, y1, x2, y2, fill=color)
 
 
 global im
