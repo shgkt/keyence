@@ -5,13 +5,12 @@ import tkinter
 class ParallelLineCanvas:
     def __init__(self, canvas):
         self.canvas = canvas
-        self.start_x = tkinter.IntVar()
-        self.start_x_str = tkinter.StringVar()
-        self.start_y = tkinter.IntVar()
-        self.stop_x = tkinter.IntVar()
-        self.stop_y = tkinter.IntVar()
-        self.distance = tkinter.IntVar()
-        self.motion_bind_id = tkinter.IntVar()
+        self.start_x = 0
+        self.start_y = 0
+        self.stop_x = 0
+        self.stop_y = 0
+        self.distance = 0
+        self.motion_bind_id = 0
         self.end = True
         self.second_line = False
         self.line = []
@@ -35,9 +34,8 @@ class ParallelLineCanvas:
         # 1本目モード
         self.end = not self.end
         if self.end is not True:
-            self.start_x.set(event.x)
-            self.start_x_str.set(str(event.x))
-            self.start_y.set(event.y)
+            self.start_x = event.x
+            self.start_y = event.y
             self.motion_bind_id = self.canvas.bind(
                 '<Motion>', self.button_move)
             self.drawing_line = self.draw_first_line(event)
@@ -49,8 +47,8 @@ class ParallelLineCanvas:
         if not self.second_line:
             self.canvas.delete(self.drawing_line)
             # 傾きを出して視点と終端を決める
-            self.slope = (event.y - self.start_y.get()) / \
-                (event.x - self.start_x.get())
+            self.slope = (event.y - self.start_y) / \
+                (event.x - self.start_x)
             self.drawing_line = self.draw_first_line(event)
         else:
             self.canvas.delete(self.drawing_line)
@@ -61,8 +59,8 @@ class ParallelLineCanvas:
         return d
 
     def draw_first_line(self, event):
-        return self.draw_line(self.start_x.get() - self.times,
-                              self.start_y.get() - self.slope * self.times, event.x + self.times, event.y + self.slope * self.times, "black")
+        return self.draw_line(self.start_x - self.times,
+                              self.start_y - self.slope * self.times, event.x + self.times, event.y + self.slope * self.times, "black")
 
     def draw_second_line(self, event):
         return self.draw_line(event.x - self.times,
