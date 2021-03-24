@@ -23,7 +23,7 @@ class ParallelLineCanvas:
         self.times = 1000
         self.slope = 0
 
-    def button_press(self, event):
+    def mouse_click(self, event):
         # 2本目モード
         if self.second_line:
             self.end = True

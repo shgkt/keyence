@@ -40,7 +40,10 @@ class Application(tkinter.Frame):
         self.distance = self.canvas_obj.distance
         self.canvas.create_image(0, 0, anchor='nw', image=im)
         self.canvas.grid(row=0, column=0, rowspan=7)
-        self.canvas.bind('<ButtonPress-1>', self.canvas_obj.button_press)
+        self.canvas.bind('<ButtonPress-1>', self.canvas_click)
+
+    def canvas_click(self, event):
+        self.canvas_obj.mouse_click(event)
 
     def init_label(self):
         # 説明ラベル
