@@ -80,8 +80,6 @@ class ParallelLineCanvas:
         vs = - 1 / self.slope  # vertical slope
         dx = d / math.sqrt(vs**2 + 1)
         dy = d * vs / math.sqrt(vs**2 + 1)
-        print(dx)
-        print(dy)
         return self.draw_line(event.x,
                               event.y, event.x - dx, event.y - dy, "black")
 
