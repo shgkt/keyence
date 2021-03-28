@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 import DragToDrawCanvas
 import ParallelLineCanvas
 import HorizontalLineCanvas
+import VerticalLineCanvas
 
 
 class Application(tkinter.Frame):
@@ -34,7 +35,9 @@ class Application(tkinter.Frame):
             self, bg='lightblue', width=300, height=300, highlightthickness=0)
         #self.canvas_obj = DragToDrawCanvas.DragToDrawCanvas(self.canvas)
         #self.canvas_obj = ParallelLineCanvas.ParallelLineCanvas(self.canvas)
-        self.canvas_obj = HorizontalLineCanvas.HorizontalLineCanvas(
+        # self.canvas_obj = HorizontalLineCanvas.HorizontalLineCanvas(
+        #    self.canvas)
+        self.canvas_obj = VerticalLineCanvas.VerticalLineCanvas(
             self.canvas)
         self.start_x = self.canvas_obj.start_x
         self.start_y = self.canvas_obj.start_y
