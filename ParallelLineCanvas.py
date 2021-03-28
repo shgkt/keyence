@@ -29,7 +29,7 @@ class ParallelLineCanvas:
             self.second_line = False
             self.line.append(self.draw_second_line(event))
             self.canvas.unbind('<Motion>', self.motion_bind_id)
-            return self.start_x, self.start_y
+            return event.x, event.y
 
         # 1本目モード
         self.end = not self.end
